@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-bg text-body font-body font-light antialiased overflow-x-hidden cursor-none;
+  }
+
+  a        { @apply cursor-none; }
+  button   { @apply cursor-none font-body; }
+  ::selection { @apply bg-pink/20 text-bright; }
+
+  ::-webkit-scrollbar       { @apply w-1; }
+  ::-webkit-scrollbar-track { @apply bg-bg; }
+  ::-webkit-scrollbar-thumb { @apply bg-border2 rounded; }
+}
+
+/* ── Components ───────────────────────────────────────────── */
+@layer components {
+  /* Clip-path button shape */
+  .btn-clip {
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  /* Noise overlay */
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply text-2xs tracking-[0.3em] uppercase text-pink flex items-center gap-2 mb-2;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block w-5 h-px bg-pink flex-shrink-0;
+  }
+
+  /* Section heading */
+  .section-title {
+    @apply font-display font-bold text-bright leading-none mb-16;
+    font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  /* Skill bar fill animation */
+  .bar-fill {
+    @apply h-full rounded-sm;
+    background: linear-gradient(90deg, theme('colors.pink'), theme('colors.cyan'));
+    width: 0%;
+    transition: width 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
